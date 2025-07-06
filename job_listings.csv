@@ -1,0 +1,11 @@
+Job ID,Title,Company,Description,Skills,Location
+1,Data Analyst,Google,Analyze data using SQL and Python,SQL;Python,Remote
+2,Backend Developer,Amazon,Build REST APIs with Node and MongoDB,NodeJS;MongoDB,Remote
+3,Frontend Developer,Meta,Develop responsive UIs using React and TypeScript,React;TypeScript,Remote
+4,ML Engineer,Netflix,Deploy machine learning models in production,Python;TensorFlow;Docker,California
+5,Cloud Engineer,Microsoft,Manage cloud infrastructure on Azure,Azure;DevOps;CI/CD,Hyderabad
+6,Data Scientist,IBM,Perform statistical analysis and build predictive models,Python;Pandas;Scikit-learn,Bangalore
+7,Full Stack Developer,Tesla,Work on both backend and frontend development,JavaScript;NodeJS;React,Fremont
+8,Cybersecurity Analyst,Oracle,Monitor and secure network systems,Security;Linux;SIEM,Bangalore
+9,Database Administrator,Salesforce,Maintain and optimize database performance,SQL;PostgreSQL;Backup,Remote
+10,Product Manager,Adobe,Define product roadmap and manage development lifecycle,Agile;Communication;JIRA,San Jose
