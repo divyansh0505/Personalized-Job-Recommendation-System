@@ -1,59 +1,58 @@
 import streamlit as st
-from utils.parse_resume import extract_text  
 import pandas as pd
+from utils.parse_resume import extract_text
 from utils.match_jobs import recommend_jobs
+from utils.ui import apply_custom_styles, job_selection_ui, display_results
 
-#st.image("logo.png", width=80) FOR LOGO
-st.markdown(
-    "<h3 style='color:#1f77b4;'>Welcome to <b>JobSense</b> — your personalized job recommender 🔍</h3>",
-    unsafe_allow_html=True
-)
-
-
-st.title("🔍 Personalized Job Recommendation System")
-
-uploaded_file = st.file_uploader("Upload your resume", type=["pdf", "docx"])
-
-if uploaded_file:
-    resume_text = extract_text(uploaded_file)
-    st.success("✅ Resume uploaded successfully!")
-
-    
-    st.markdown(
-        "<h2 style='color:#1f77b4;'>🎯 Personalized Job Matches</h2>",
-        unsafe_allow_html=True
-    )
-
-    #  Collapsible Resume Viewer
-    with st.expander("📄 View Extracted Resume Text"):
-        st.text_area("Resume Text", resume_text, height=250)
-
-   
+def load_job_data():
+    """Load and prepare job data"""
     job_df = pd.read_csv("data/job_listings.csv")
-    top_jobs = recommend_jobs(resume_text, job_df)
+    job_titles = job_df["Title"].dropna().unique().tolist()
+    job_titles.sort()
+    return job_df, job_titles
 
 
-    st.markdown("### 🔎 Top Recommended Jobs")
-    if top_jobs.empty:
-        st.warning("No matching jobs found. Try uploading a different resume.")
+def main():
+    # Apply custom styles
+    apply_custom_styles()
+    
+    # App title
+    st.title("🔍 Personalized Job Recommendation System")
+    
+    # Load job data
+    job_df, job_titles = load_job_data()
+    
+    # Resume upload section (only this appears first)
+    uploaded_file = st.file_uploader("📄 Upload your resume", type=["pdf", "docx"])
+    
+    # Initialize session state
+    if 'job_dropdown' not in st.session_state:
+        st.session_state.job_dropdown = []
+    
+    # ONLY SHOW THE REST AFTER RESUME IS UPLOADED
+    if uploaded_file:
+        resume_text = extract_text(uploaded_file)
+        st.success("✅ Resume uploaded and extracted successfully.")
+        
+        # Resume text dropdown
+        with st.expander("📄 View Extracted Resume Text", expanded=False):
+            st.text_area("Resume Content", resume_text, height=250, label_visibility="collapsed")
+        
+        # NOW SHOW THE JOB FILTERS (previously this was outside the if block)
+        st.subheader("🔍 Filter Job Recommendations")
+        clear_clicked, selected_titles = job_selection_ui(job_titles)
+        
+        if clear_clicked:
+            st.session_state.job_dropdown = []
+            st.experimental_rerun()
+        
+        # Process and show results
+        filtered_df = job_df[job_df["Title"].isin(selected_titles)] if selected_titles else job_df
+        top_jobs = recommend_jobs(resume_text, filtered_df)
+        display_results(top_jobs)
     else:
-        for idx, row in top_jobs.iterrows():
-            with st.container():
-                col1, col2 = st.columns([1, 5])     #width ratio
+        # Show nothing else until resume is uploaded
+        st.info("ℹ️ Please upload your resume to see job filters and recommendations")
 
-                with col1:
-                    st.markdown("💼")
-
-                with col2:
-                    st.markdown(
-                        f"<h4 style='margin-bottom: 0px;'>{row['Title']}</h4>",
-                        unsafe_allow_html=True
-                    )
-                    st.write(row["Description"])
-                st.markdown("---")
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
