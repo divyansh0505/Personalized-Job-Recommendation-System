@@ -7,8 +7,8 @@ def apply_custom_styles():
         background-color: #28a745;
         color: white;
         font-weight: bold;
-        font-size: 16px;
-        padding: 10px 24px;
+        font-size: 8px;
+        padding: 6px 12px;
         border-radius: 8px;
         border: none;
         transition: 0.3s ease;
