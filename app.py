@@ -40,6 +40,12 @@ def main():
         # Filter jobs and show results
         filtered_df = job_df[job_df["Title"].isin(selected_titles)] if selected_titles else job_df
         top_jobs = recommend_jobs(resume_text, filtered_df)
+        search_query = st.text_input("🔎 Search within matched jobs (optional):").lower()
+        if search_query:
+            top_jobs = top_jobs[
+                top_jobs["Title"].str.lower().str.contains(search_query) |
+                top_jobs["Description"].str.lower().str.contains(search_query)
+            ]
         display_results(top_jobs)
         
 
