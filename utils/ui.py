@@ -55,12 +55,17 @@ def job_selection_ui(job_titles):
     return st.session_state.job_dropdown
 
 def display_results(top_jobs):
-    """Display the job recommendations"""
     st.subheader("🎯 Top Job Matches")
+
+    if top_jobs.empty:
+        st.warning("😕 No matching jobs found.")
+        return
+
     for idx, row in top_jobs.iterrows():
         st.markdown(f"""
-        <div style='padding: 10px 15px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px;'>
-            <strong>{row['Title']}</strong><br>
-            <span>{row['Description']}</span>
-        </div>
+            <div style='padding: 15px; border: 1px solid #ccc; border-radius: 10px; margin-bottom: 12px; background-color: #f9f9f9;'>
+                <h4 style='margin-bottom: 5px; color: #006400;'>{row['Title']}</h4>
+                <p style='margin: 0 0 10px;'>{row['Description']}</p>
+                <p style='color: #555; font-size: 14px;'>💡 Match Score: <strong>{row['match_score']*100:.2f}%</strong></p>
+            </div>
         """, unsafe_allow_html=True)
