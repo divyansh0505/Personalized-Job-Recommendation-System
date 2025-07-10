@@ -3,6 +3,7 @@ import pandas as pd
 from utils.parse_resume import extract_text
 from utils.match_jobs import recommend_jobs
 from utils.ui import apply_custom_styles, display_results,job_selection_ui
+import io
 
 def load_job_data():
     job_df = pd.read_csv("data/job_listings.csv")
@@ -40,6 +41,18 @@ def main():
         filtered_df = job_df[job_df["Title"].isin(selected_titles)] if selected_titles else job_df
         top_jobs = recommend_jobs(resume_text, filtered_df)
         display_results(top_jobs)
+        
+
+        # CSV download
+        if not top_jobs.empty:
+            csv = top_jobs.to_csv(index=False)
+            st.download_button(
+                label="📥 Download Top Matches",
+                data=io.BytesIO(csv.encode()),
+                file_name="top_job_matches.csv",
+                mime="text/csv"
+            )
+
     else:
         st.info("ℹ️ Please upload your resume to see job filters and recommendations")
 
