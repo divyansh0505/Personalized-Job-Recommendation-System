@@ -25,22 +25,31 @@ def apply_custom_styles():
     """, unsafe_allow_html=True)
 
 def job_selection_ui(job_titles):
-    """Render the job selection UI components"""
+    # Initialize session state
     if 'job_dropdown' not in st.session_state:
         st.session_state.job_dropdown = []
     
-    selected_titles = st.multiselect(
-        "🎯 Select Job Titles to Filter (optional):",
-        job_titles,
-        default=st.session_state.job_dropdown,
-        key="job_multiselect"
-    )
+    # Create columns for better layout
+    col1, col2 = st.columns([4, 1])
     
+    with col1:
+        # Multiselect widget - use a unique key
+        selected_titles = st.multiselect(
+            "🎯 Select Job Titles to Filter (optional):",
+            job_titles,
+            default=st.session_state.job_dropdown,
+            key="job_filter_widget"
+        )
+    
+    with col2:
+        # Clear filters button
+        if st.button("🔄 Clear Filters", key="clear_filters_button"):
+            st.session_state.job_dropdown = []
+            st.rerun()
+    
+    # Update session state if selection changed
     if selected_titles != st.session_state.job_dropdown:
         st.session_state.job_dropdown = selected_titles
-    
-    if st.button("🔄 Clear Filters"):
-        st.session_state.job_dropdown = []
         st.rerun()
     
     return st.session_state.job_dropdown

@@ -2,45 +2,13 @@ import streamlit as st
 import pandas as pd
 from utils.parse_resume import extract_text
 from utils.match_jobs import recommend_jobs
-from utils.ui import apply_custom_styles, display_results
+from utils.ui import apply_custom_styles, display_results,job_selection_ui
 
 def load_job_data():
-    """Load and prepare job data"""
     job_df = pd.read_csv("data/job_listings.csv")
     job_titles = job_df["Title"].dropna().unique().tolist()
     job_titles.sort()
     return job_df, job_titles
-
-def job_selection_ui(job_titles):
-    """Render the job selection UI components"""
-    # Initialize session state
-    if 'job_dropdown' not in st.session_state:
-        st.session_state.job_dropdown = []
-    
-    # Create columns for better layout
-    col1, col2 = st.columns([4, 1])
-    
-    with col1:
-        # Multiselect widget - use a unique key
-        selected_titles = st.multiselect(
-            "🎯 Select Job Titles to Filter (optional):",
-            job_titles,
-            default=st.session_state.job_dropdown,
-            key="job_filter_widget"
-        )
-    
-    with col2:
-        # Clear filters button
-        if st.button("🔄 Clear Filters", key="clear_filters_button"):
-            st.session_state.job_dropdown = []
-            st.rerun()
-    
-    # Update session state if selection changed
-    if selected_titles != st.session_state.job_dropdown:
-        st.session_state.job_dropdown = selected_titles
-        st.rerun()
-    
-    return st.session_state.job_dropdown
 
 def main():
     # Apply custom styles
