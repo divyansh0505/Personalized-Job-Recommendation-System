@@ -4,6 +4,9 @@ from utils.parse_resume import extract_text
 from utils.match_jobs import recommend_jobs
 from utils.ui import apply_custom_styles, display_results,job_selection_ui
 import io
+import plotly
+import plotly.express as px
+
 
 def load_job_data():
     job_df = pd.read_csv("data/job_listings.csv")
@@ -49,6 +52,13 @@ def main():
                 top_jobs["Description"].str.lower().str.contains(search_query)
             ]
         display_results(top_jobs)
+
+
+# Show chart if there are matched jobs
+        fig = px.bar(top_jobs, x="Title", y="match_score", title="📈 Match Score per Job")
+        st.plotly_chart(fig, use_container_width=True)
+    
+
         
         if st.session_state.bookmarked_jobs:
             st.subheader("📌 Bookmarked Jobs")
