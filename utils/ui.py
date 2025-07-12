@@ -58,14 +58,27 @@ def display_results(top_jobs):
     st.subheader("🎯 Top Job Matches")
 
     if top_jobs.empty:
-        st.warning("😕 No matching jobs found.")
+        st.info("No matching jobs found.")
         return
 
     for idx, row in top_jobs.iterrows():
-        st.markdown(f"""
-            <div style='padding: 15px; border: 1px solid #ccc; border-radius: 10px; margin-bottom: 12px; background-color: #f9f9f9;'>
-                <h4 style='margin-bottom: 5px; color: #006400;'>{row['Title']}</h4>
-                <p style='margin: 0 0 10px;'>{row['Description']}</p>
-                <p style='color: #555; font-size: 14px;'>💡 Match Score: <strong>{row['match_score']*100:.2f}%</strong></p>
-            </div>
-        """, unsafe_allow_html=True)
+        with st.container():
+            job_dict = row.to_dict()
+            is_bookmarked = job_dict in st.session_state.bookmarked_jobs
+
+            st.markdown(f"**{row['Title']}**  \n{row['Description']}  \n---")
+
+            # Create a unique key
+            bookmark_key = f"bookmark_{idx}"
+
+            # Handle button click
+            if st.button("❌ Remove Bookmark" if is_bookmarked else "🔖 Bookmark", key=bookmark_key):
+                if is_bookmarked:
+                    st.session_state.bookmarked_jobs.remove(job_dict)
+                    st.success(f"Removed bookmark: {row['Title']}")
+                else:
+                    st.session_state.bookmarked_jobs.append(job_dict)
+                    st.success(f"Bookmarked: {row['Title']}")
+                
+                # Avoid needing double-click by forcing rerun with updated state
+                st.rerun()

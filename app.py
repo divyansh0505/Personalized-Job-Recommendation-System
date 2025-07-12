@@ -14,7 +14,9 @@ def load_job_data():
 def main():
     # Apply custom styles
     apply_custom_styles()
-    
+    if "bookmarked_jobs" not in st.session_state:
+        st.session_state.bookmarked_jobs = []
+
     # App title
     st.title("🔍 Personalized Job Recommendation System")
     
@@ -47,6 +49,13 @@ def main():
                 top_jobs["Description"].str.lower().str.contains(search_query)
             ]
         display_results(top_jobs)
+        
+        if st.session_state.bookmarked_jobs:
+            st.subheader("📌 Bookmarked Jobs")
+            for job in st.session_state.bookmarked_jobs:
+                st.markdown(f"**{job['Title']}**  \n{job['Description']}  \n---")
+
+
         
 
         # CSV download
