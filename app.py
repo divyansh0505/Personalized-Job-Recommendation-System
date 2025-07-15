@@ -83,6 +83,14 @@ def main():
                 st.session_state.bookmarked_jobs = []
                 st.success("All bookmarks removed!")
                 st.rerun()    
+            bookmarked_df = pd.DataFrame(st.session_state.bookmarked_jobs)
+            csv_bookmarked = bookmarked_df.to_csv(index=False)
+            st.download_button(
+                label="📥 Download Bookmarked Jobs",
+                data=io.BytesIO(csv_bookmarked.encode()),
+                file_name="bookmarked_jobs.csv",
+                mime="text/csv"
+            )     
         elif show_bookmarks:
             st.info("You have not bookmarked any jobs yet.")    
 
