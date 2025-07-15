@@ -62,8 +62,12 @@ def main():
         
         if st.session_state.bookmarked_jobs:
             st.subheader("📌 Bookmarked Jobs")
-            for job in st.session_state.bookmarked_jobs:
-                st.markdown(f"**{job['Title']}**  \n{job['Description']}  \n---")
+            if st.button("🗑 Clear All Bookmarks"):
+                st.session_state.bookmarked_jobs = []
+                st.success("All bookmarks removed!")
+                st.experimental_rerun()
+
+                
 
 
         
