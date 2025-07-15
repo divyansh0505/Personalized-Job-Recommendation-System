@@ -59,14 +59,6 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
     
 
-        
-        if st.session_state.bookmarked_jobs:
-            st.subheader("📌 Bookmarked Jobs")
-            if st.button("🗑 Clear All Bookmarks"):
-                st.session_state.bookmarked_jobs = []
-                st.success("All bookmarks removed!")
-                st.experimental_rerun()
-
                 
 
 
@@ -81,6 +73,18 @@ def main():
                 file_name="top_job_matches.csv",
                 mime="text/csv"
             )
+        show_bookmarks = st.checkbox("📌 Show Bookmarked Jobs")
+
+        if show_bookmarks and st.session_state.bookmarked_jobs:
+            st.subheader("📌 Bookmarked Jobs")
+            for job in st.session_state.bookmarked_jobs:
+                st.markdown(f"**{job['Title']}**  \n{job['Description']}  \n---")
+            if st.button("🗑 Clear All Bookmarks"):
+                st.session_state.bookmarked_jobs = []
+                st.success("All bookmarks removed!")
+                st.rerun()    
+        elif show_bookmarks:
+            st.info("You have not bookmarked any jobs yet.")    
 
     else:
         st.info("ℹ️ Please upload your resume to see job filters and recommendations")
