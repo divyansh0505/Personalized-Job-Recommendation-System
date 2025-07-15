@@ -39,18 +39,33 @@ def main():
             st.text_area("Resume Content", resume_text, height=250, label_visibility="collapsed")
         
         # Job filters section
+                # Job filters section
         st.subheader("🔍 Filter Job Recommendations")
+
+        # Category Filter (First apply)
+        job_categories = job_df["Category"].dropna().unique().tolist()
+        selected_categories = st.multiselect("📂 Filter by Job Categories (optional):", job_categories)
+
+        # Title Filter
         selected_titles = job_selection_ui(job_titles)
-        
-        # Filter jobs and show results
-        filtered_df = job_df[job_df["Title"].isin(selected_titles)] if selected_titles else job_df
-        top_jobs = recommend_jobs(resume_text, filtered_df)
+
+        # Apply category and title filters
+        filtered_df = job_df
+        if selected_categories:
+            filtered_df = filtered_df[filtered_df["Category"].isin(selected_categories)]
+        if selected_titles:
+            filtered_df = filtered_df[filtered_df["Title"].isin(selected_titles)]
+
+        # Apply keyword search filter
         search_query = st.text_input("🔎 Search within matched jobs (optional):").lower()
         if search_query:
-            top_jobs = top_jobs[
-                top_jobs["Title"].str.lower().str.contains(search_query) |
-                top_jobs["Description"].str.lower().str.contains(search_query)
+            filtered_df = filtered_df[
+                filtered_df["Title"].str.lower().str.contains(search_query) |
+                filtered_df["Description"].str.lower().str.contains(search_query)
             ]
+
+        # Run recommendations
+        top_jobs = recommend_jobs(resume_text, filtered_df)
         display_results(top_jobs)
 
 
