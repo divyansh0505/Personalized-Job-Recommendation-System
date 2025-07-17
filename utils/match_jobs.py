@@ -1,30 +1,42 @@
-def recommend_jobs(resume_text, job_df, top_n=5):
-    import pandas as pd
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
 
-    if job_df.empty:
-        return pd.DataFrame(columns=["Title", "Description", "match_score"])
+def recommend_jobs(resume_text, jobs_df, top_n=5):
+    jobs_df = jobs_df.copy()
 
-    job_df = job_df.copy()
+    # Combine job title + description
+    jobs_df["combined"] = jobs_df["Title"].fillna("") + " " + jobs_df["Description"].fillna("")
 
-    # Combine title and description for matching
-    job_df["combined"] = job_df["Title"].fillna("") + " " + job_df["Description"].fillna("")
+    # Vectorization
+    vectorizer = TfidfVectorizer(stop_words='english')
+    vectors = vectorizer.fit_transform([resume_text] + jobs_df["combined"].tolist())
 
-    # Combine resume and job texts
-    texts = [resume_text] + job_df["combined"].tolist()
+    resume_vector = vectors[0]
+    job_vectors = vectors[1:]
 
-    # TF-IDF Vectorization
-    vectorizer = TfidfVectorizer(stop_words="english")
-    tfidf_matrix = vectorizer.fit_transform(texts)
+    # Similarity score
+    similarities = cosine_similarity(resume_vector, job_vectors).flatten()
+    jobs_df["match_score"] = similarities
 
-    # Cosine similarity of resume with each job
-    cosine_sim = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:]).flatten()
+    # Match keywords
+    resume_tokens = set(resume_text.lower().split())
+    matched_keywords_list = []
 
-    # Add match score to DataFrame
-    job_df["match_score"] = cosine_sim
+    feature_names = vectorizer.get_feature_names_out()
+    resume_tfidf = resume_vector.toarray().flatten()
 
-    # Sort and return top N
-    top_matches = job_df.sort_values(by="match_score", ascending=False).head(top_n)
+    for i in range(job_vectors.shape[0]):
+        job_vector = job_vectors[i].toarray().flatten()
+        matches = [
+            feature_names[j] for j in range(len(feature_names))
+            if resume_tfidf[j] > 0 and job_vector[j] > 0 and feature_names[j] in resume_tokens
+        ]
+        matched_keywords_list.append(", ".join(matches[:5]))  # Limit to 5 keywords
 
-    return top_matches[["Title", "Description", "match_score"]]
+    jobs_df["Matched Keywords"] = matched_keywords_list
+
+    # Sort by score and select top N
+    top_jobs = jobs_df.sort_values(by="match_score", ascending=False).head(top_n)
+
+    return top_jobs[["Title", "Description", "match_score", "Matched Keywords"]]

@@ -73,12 +73,6 @@ def main():
         fig = px.bar(top_jobs, x="Title", y="match_score", title="📈 Match Score per Job")
         st.plotly_chart(fig, use_container_width=True)
     
-
-                
-
-
-        
-
         # CSV download
         if not top_jobs.empty:
             csv = top_jobs.to_csv(index=False)

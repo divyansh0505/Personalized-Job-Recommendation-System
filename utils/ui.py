@@ -66,12 +66,18 @@ def display_results(top_jobs):
             job_dict = row.to_dict()
             is_bookmarked = job_dict in st.session_state.bookmarked_jobs
 
-            st.markdown(f"**{row['Title']}**  \n{row['Description']}  \n---")
+            st.markdown(f"***{row['Title']}***  \n{row['Description']}")
+            
+            # Show match keywords if available
+            if "Matched Keywords" in row and row["Matched Keywords"]:
+                st.markdown(f"**🔑 Matched Keywords:** {row['Matched Keywords']}")
 
-            # Create a unique key
+            # Optional: Show similarity score
+            if "match_score" in row:
+                st.markdown(f"**📊 Match Score:** {row['match_score']:.2f}")
+
+            # Bookmark button
             bookmark_key = f"bookmark_{idx}"
-
-            # Handle button click
             if st.button("❌ Remove Bookmark" if is_bookmarked else "🔖 Bookmark", key=bookmark_key):
                 if is_bookmarked:
                     st.session_state.bookmarked_jobs.remove(job_dict)
@@ -79,6 +85,4 @@ def display_results(top_jobs):
                 else:
                     st.session_state.bookmarked_jobs.append(job_dict)
                     st.success(f"Bookmarked: {row['Title']}")
-                
-                # Avoid needing double-click by forcing rerun with updated state
                 st.rerun()
