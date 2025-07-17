@@ -1,4 +1,9 @@
 import streamlit as st
+import plotly
+import plotly.express as px
+import pandas as pd
+import io
+
 
 def apply_custom_styles():
     st.markdown("""
@@ -90,18 +95,34 @@ def display_results(top_jobs):
 def display_bookmarks():
     st.subheader("🔖 Bookmarked Jobs")
 
-    if not st.session_state.bookmarked_jobs:
+    bookmarked_jobs = st.session_state.bookmarked_jobs
+
+    if not bookmarked_jobs:
         st.info("You haven't bookmarked any jobs yet.")
         return
 
-    for idx, job in enumerate(st.session_state.bookmarked_jobs):
+    for idx, job in enumerate(bookmarked_jobs):
         with st.container():
             st.markdown(f"**{job['Title']}**  \n{job['Description']}  \n"
                         f"**🔑 Matched Keywords:** {job.get('Matched Keywords', '')}  \n"
-                        f"**📊 Match Score:** {round(job.get('match_score', 0)*100)}%")
+                        f"**📊 Match Score:** {round(job.get('match_score', 0) * 100)}%")
             st.markdown("---")
 
             if st.button(f"❌ Remove Bookmark", key=f"remove_{idx}"):
                 st.session_state.bookmarked_jobs.remove(job)
                 st.success(f"Removed bookmark: {job['Title']}")
                 st.rerun()
+
+    # Convert list of dicts to DataFrame
+    if bookmarked_jobs:
+        df = pd.DataFrame(bookmarked_jobs)
+        fig = px.bar(df, x="Title", y="match_score", title="📈 Match Score per Bookmarked Job")
+        st.plotly_chart(fig, use_container_width=True)
+
+        csv = df.to_csv(index=False)
+        st.download_button(
+            label="📥 Download Bookmarked Jobs",
+            data=io.BytesIO(csv.encode()),
+            file_name="bookmarked_job_matches.csv",
+            mime="text/csv"
+        )
