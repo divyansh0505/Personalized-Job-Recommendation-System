@@ -86,3 +86,22 @@ def display_results(top_jobs):
                     st.session_state.bookmarked_jobs.append(job_dict)
                     st.success(f"Bookmarked: {row['Title']}")
                 st.rerun()
+
+def display_bookmarks():
+    st.subheader("🔖 Bookmarked Jobs")
+
+    if not st.session_state.bookmarked_jobs:
+        st.info("You haven't bookmarked any jobs yet.")
+        return
+
+    for idx, job in enumerate(st.session_state.bookmarked_jobs):
+        with st.container():
+            st.markdown(f"**{job['Title']}**  \n{job['Description']}  \n"
+                        f"**🔑 Matched Keywords:** {job.get('Matched Keywords', '')}  \n"
+                        f"**📊 Match Score:** {round(job.get('match_score', 0)*100)}%")
+            st.markdown("---")
+
+            if st.button(f"❌ Remove Bookmark", key=f"remove_{idx}"):
+                st.session_state.bookmarked_jobs.remove(job)
+                st.success(f"Removed bookmark: {job['Title']}")
+                st.rerun()
