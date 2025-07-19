@@ -1,11 +1,61 @@
-Job ID,Title,Company,Description,Skills,Location,Category
-1,Data Analyst,Google,Analyze data using SQL and Python,SQL;Python,Remote,Data
-2,Backend Developer,Amazon,Build REST APIs with Node and MongoDB,NodeJS;MongoDB,Remote,Software
-3,Frontend Developer,Meta,Develop responsive UIs using React and TypeScript,React;TypeScript,Remote,Software
-4,ML Engineer,Netflix,Deploy machine learning models in production,Python;TensorFlow;Docker,California,AI/ML
-5,Cloud Engineer,Microsoft,Manage cloud infrastructure on Azure,Azure;DevOps;CI/CD,Hyderabad,Cloud
-6,Data Scientist,IBM,Perform statistical analysis and build predictive models,Python;Pandas;Scikit-learn,Bangalore,Data
-7,Full Stack Developer,Tesla,Work on both backend and frontend development,JavaScript;NodeJS;React,Fremont,Software
-8,Cybersecurity Analyst,Oracle,Monitor and secure network systems,Security;Linux;SIEM,Bangalore,Cybersecurity
-9,Database Administrator,Salesforce,Maintain and optimize database performance,SQL;PostgreSQL;Backup,Remote,Data
-10,Product Manager,Adobe,Define product roadmap and manage development lifecycle,Agile;Communication;JIRA,San Jose,Management
+Job ID,Title,Description,Skills,Location,Category
+1,Data Analyst,Work as a Data Analyst in a fast-paced environment with modern tools.,CSS;PostgreSQL;Pandas;NodeJS;Django,San Jose,Support
+2,Backend Developer,Work as a Backend Developer in a fast-paced environment with modern tools.,SQL;Flask;React,Fremont,Design
+3,Frontend Developer,Work as a Frontend Developer in a fast-paced environment with modern tools.,React;PostgreSQL;Python,Remote,Design
+4,ML Engineer,Work as a ML Engineer in a fast-paced environment with modern tools.,SQL;AWS;Agile;Azure;TensorFlow,California,Support
+5,Cloud Engineer,Work as a Cloud Engineer in a fast-paced environment with modern tools.,CSS;JavaScript,Fremont,AI/ML
+6,Data Scientist,Work as a Data Scientist in a fast-paced environment with modern tools.,AWS;Java;Django,Hyderabad,Software
+7,Full Stack Developer,Work as a Full Stack Developer in a fast-paced environment with modern tools.,Kubernetes;MongoDB;Python;TensorFlow;JIRA,California,DevOps
+8,Cybersecurity Analyst,Work as a Cybersecurity Analyst in a fast-paced environment with modern tools.,Flask;Communication;Azure;AWS;Java,Fremont,Design
+9,Database Administrator,Work as a Database Administrator in a fast-paced environment with modern tools.,Azure;NodeJS;Kubernetes;Pandas;JavaScript,Fremont,DevOps
+10,Product Manager,Work as a Product Manager in a fast-paced environment with modern tools.,C++;Docker;Django;CI/CD,Remote,Cybersecurity
+11,DevOps Engineer,Work as a DevOps Engineer in a fast-paced environment with modern tools.,React;TensorFlow;Agile,London,Support
+12,AI Researcher,Work as a AI Researcher in a fast-paced environment with modern tools.,JavaScript;Flask;SQL;AWS,Fremont,Data
+13,Business Analyst,Work as a Business Analyst in a fast-paced environment with modern tools.,Flask;AWS;Django;Linux,San Jose,DevOps
+14,Software Engineer,Work as a Software Engineer in a fast-paced environment with modern tools.,Azure;CSS;React;TensorFlow,Remote,Data
+15,QA Engineer,Work as a QA Engineer in a fast-paced environment with modern tools.,TensorFlow;C++,Hyderabad,Management
+16,Site Reliability Engineer,Work as a Site Reliability Engineer in a fast-paced environment with modern tools.,JIRA;Pandas,Bangalore,Software
+17,Blockchain Developer,Work as a Blockchain Developer in a fast-paced environment with modern tools.,NodeJS;AWS;C++,New York,Support
+18,Computer Vision Engineer,Work as a Computer Vision Engineer in a fast-paced environment with modern tools.,Java;Python;MongoDB,Fremont,Support
+19,NLP Engineer,Work as a NLP Engineer in a fast-paced environment with modern tools.,Pandas;MongoDB;C++;Django;Kubernetes,San Jose,DevOps
+20,Technical Writer,Work as a Technical Writer in a fast-paced environment with modern tools.,Flask;CSS;SQL,New York,Cloud
+21,Game Developer,Work as a Game Developer in a fast-paced environment with modern tools.,Scikit-learn;Agile;CI/CD;Django;Flask,San Jose,Data
+22,Mobile App Developer,Work as a Mobile App Developer in a fast-paced environment with modern tools.,AWS;TensorFlow;Scikit-learn;Linux;Communication,San Jose,Design
+23,UI/UX Designer,Work as a UI/UX Designer in a fast-paced environment with modern tools.,Pandas;Kubernetes;JavaScript;MongoDB;NodeJS,London,Cloud
+24,IT Support Specialist,Work as a IT Support Specialist in a fast-paced environment with modern tools.,TensorFlow;Java;JIRA;JavaScript;SQL,Remote,Support
+25,Network Administrator,Work as a Network Administrator in a fast-paced environment with modern tools.,Java;Firebase;SQL;JIRA;React,Bangalore,AI/ML
+26,System Architect,Work as a System Architect in a fast-paced environment with modern tools.,Django;Agile,San Jose,Management
+27,Data Engineer,Work as a Data Engineer in a fast-paced environment with modern tools.,NodeJS;HTML,New York,Data
+28,Security Engineer,Work as a Security Engineer in a fast-paced environment with modern tools.,Docker;SQL,Remote,Management
+29,Cloud Architect,Work as a Cloud Architect in a fast-paced environment with modern tools.,React;Django,Fremont,Testing
+30,Project Manager,Work as a Project Manager in a fast-paced environment with modern tools.,React;Pandas,London,Cloud
+31,Embedded Systems Engineer,Work as a Embedded Systems Engineer in a fast-paced environment with modern tools.,Firebase;React;C++,Bangalore,Support
+32,Robotics Engineer,Work as a Robotics Engineer in a fast-paced environment with modern tools.,Kubernetes;Azure,California,Design
+33,Penetration Tester,Work as a Penetration Tester in a fast-paced environment with modern tools.,AWS;React;Flask;Python,Remote,Cybersecurity
+34,Digital Marketing Analyst,Work as a Digital Marketing Analyst in a fast-paced environment with modern tools.,JIRA;CSS;Python,California,Data
+35,SEO Specialist,Work as a SEO Specialist in a fast-paced environment with modern tools.,CSS;HTML;PostgreSQL;Flask;AWS,Hyderabad,Cloud
+36,Web Developer,Work as a Web Developer in a fast-paced environment with modern tools.,CSS;Linux;TensorFlow;PostgreSQL;SQL,Hyderabad,Cloud
+37,Big Data Engineer,Work as a Big Data Engineer in a fast-paced environment with modern tools.,Pandas;HTML;Azure;Docker,Remote,Data
+38,BI Developer,Work as a BI Developer in a fast-paced environment with modern tools.,React;Scikit-learn;CI/CD;PostgreSQL;Communication,Berlin,Software
+39,Solutions Architect,Work as a Solutions Architect in a fast-paced environment with modern tools.,Communication;Flask,Toronto,Software
+40,IT Consultant,Work as a IT Consultant in a fast-paced environment with modern tools.,SQL;Communication;Pandas;HTML,Hyderabad,Testing
+41,Helpdesk Technician,Work as a Helpdesk Technician in a fast-paced environment with modern tools.,Django;CSS;Docker,Fremont,AI/ML
+42,Software Tester,Work as a Software Tester in a fast-paced environment with modern tools.,CSS;TensorFlow;JIRA;Pandas;Flask,Fremont,Cybersecurity
+43,Automation Engineer,Work as a Automation Engineer in a fast-paced environment with modern tools.,Communication;PostgreSQL;HTML,Berlin,Cloud
+44,Information Security Analyst,Work as a Information Security Analyst in a fast-paced environment with modern tools.,Python;React;Flask,Fremont,Software
+45,Machine Learning Developer,Work as a Machine Learning Developer in a fast-paced environment with modern tools.,Django;SQL,Berlin,Software
+46,E-commerce Manager,Work as a E-commerce Manager in a fast-paced environment with modern tools.,Java;PostgreSQL;MongoDB,Remote,Design
+47,Product Designer,Work as a Product Designer in a fast-paced environment with modern tools.,Pandas;Communication;Linux,Berlin,AI/ML
+48,Ethical Hacker,Work as a Ethical Hacker in a fast-paced environment with modern tools.,React;Firebase;CSS;JavaScript;Scikit-learn,Hyderabad,Software
+49,AI Product Manager,Work as a AI Product Manager in a fast-paced environment with modern tools.,HTML;Python,California,Cybersecurity
+50,Software Architect,Work as a Software Architect in a fast-paced environment with modern tools.,Azure;HTML;Pandas,New York,DevOps
+51,IT Project Manager,Work as a IT Project Manager in a fast-paced environment with modern tools.,PostgreSQL;CSS;NodeJS;Agile;Communication,Berlin,Support
+52,Application Support Analyst,Work as a Application Support Analyst in a fast-paced environment with modern tools.,PostgreSQL;Django;Python;JavaScript,Fremont,Software
+53,IT Auditor,Work as a IT Auditor in a fast-paced environment with modern tools.,C++;SQL;Azure,Remote,Testing
+54,Cloud Security Specialist,Work as a Cloud Security Specialist in a fast-paced environment with modern tools.,JavaScript;Azure;Linux;Scikit-learn;TensorFlow,California,AI/ML
+55,Release Manager,Work as a Release Manager in a fast-paced environment with modern tools.,HTML;CSS;NodeJS;Django,Bangalore,Support
+56,Platform Engineer,Work as a Platform Engineer in a fast-paced environment with modern tools.,HTML;Azure;Linux,London,Software
+57,Data Quality Analyst,Work as a Data Quality Analyst in a fast-paced environment with modern tools.,MongoDB;NodeJS;React;SQL,Berlin,Data
+58,Infrastructure Engineer,Work as a Infrastructure Engineer in a fast-paced environment with modern tools.,PostgreSQL;HTML;Pandas;Agile,Hyderabad,Testing
+59,Operations Analyst,Work as a Operations Analyst in a fast-paced environment with modern tools.,Flask;AWS;CI/CD,London,Testing
+60,Tech Support Engineer,Work as a Tech Support Engineer in a fast-paced environment with modern tools.,MongoDB;C++;Agile,Hyderabad,Support

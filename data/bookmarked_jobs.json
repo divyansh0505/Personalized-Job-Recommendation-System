@@ -1,14 +1,1 @@
-[
-  {
-    "Title": "Backend Developer",
-    "Description": "Build REST APIs with Node and MongoDB",
-    "match_score": 0.0948855319032817,
-    "Matched Keywords": "backend, mongodb"
-  },
-  {
-    "Title": "Full Stack Developer",
-    "Description": "Work on both backend and frontend development",
-    "match_score": 0.08490889136570431,
-    "Matched Keywords": "backend, development, frontend, work"
-  }
-]
+[]
