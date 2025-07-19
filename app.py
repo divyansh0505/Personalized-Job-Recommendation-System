@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 from utils.parse_resume import extract_text
 from utils.match_jobs import recommend_jobs
-from utils.ui import apply_custom_styles, display_results,job_selection_ui,display_bookmarks
+from utils.ui import apply_custom_styles, display_results, job_selection_ui, display_bookmarks
+from utils.bookmark_handler import save_bookmarks, load_bookmarks
 import io
-import plotly
 import plotly.express as px
 
 
@@ -14,11 +14,13 @@ def load_job_data():
     job_titles.sort()
     return job_df, job_titles
 
+
 def main():
     apply_custom_styles()
 
+    # Load bookmarks from disk only once
     if "bookmarked_jobs" not in st.session_state:
-        st.session_state.bookmarked_jobs = []
+        st.session_state.bookmarked_jobs = load_bookmarks()
 
     st.title("🔍 Personalized Job Recommendation System")
     page = st.sidebar.selectbox("Choose a page:", ["Home", "Bookmarks"])
@@ -57,6 +59,9 @@ def main():
 
             top_jobs = recommend_jobs(resume_text, filtered_df)
             display_results(top_jobs)
+
+            # Save updated bookmarks (in case user interacted with them)
+            save_bookmarks(st.session_state.bookmarked_jobs)
 
             if not top_jobs.empty:
                 fig = px.bar(top_jobs, x="Title", y="match_score", title="📈 Match Score per Job")

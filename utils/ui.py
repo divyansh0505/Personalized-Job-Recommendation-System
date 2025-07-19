@@ -3,7 +3,7 @@ import plotly
 import plotly.express as px
 import pandas as pd
 import io
-
+ 
 
 def apply_custom_styles():
     st.markdown("""
@@ -87,9 +87,13 @@ def display_results(top_jobs):
                 if is_bookmarked:
                     st.session_state.bookmarked_jobs.remove(job_dict)
                     st.success(f"Removed bookmark: {row['Title']}")
+                    save_bookmarks(st.session_state.bookmarked_jobs)
+
                 else:
                     st.session_state.bookmarked_jobs.append(job_dict)
                     st.success(f"Bookmarked: {row['Title']}")
+                    save_bookmarks(st.session_state.bookmarked_jobs)
+
                 st.rerun()
 
 def display_bookmarks():
